@@ -1,0 +1,289 @@
+// Mock data với 100+ users - Quản lý dữ liệu như một database
+export const MOCK_USERS = [
+  // 5 users ban đầu
+  { id: 1, username: 'nguyenquoctri', password: '123456', name: 'Nguyễn Quốc Trí', balance: 5000000 },
+  { id: 2, username: 'nguyenhuungochoang', password: '123456', name: 'Nguyễn Hữu Ngọc Hoàng', balance: 3000000 },
+  { id: 3, username: 'tranvantrong', password: '123456', name: 'Trần Văn Trọng', balance: 10000000 },
+  { id: 4, username: 'phamtiendat', password: '123456', name: 'Phạm Tiến Đạt', balance: 7500000 },
+  { id: 5, username: 'nguyenthanhphong', password: '123456', name: 'Nguyễn Thanh Phong', balance: 17500000 },
+  
+  // Thêm 100+ users giả
+  { id: 6, username: 'leminhduc', password: '123456', name: 'Lê Minh Đức', balance: 8500000 },
+  { id: 7, username: 'tranthithanh', password: '123456', name: 'Trần Thị Thanh', balance: 4200000 },
+  { id: 8, username: 'phamvantuan', password: '123456', name: 'Phạm Văn Tuấn', balance: 6200000 },
+  { id: 9, username: 'nguyenvanhoa', password: '123456', name: 'Nguyễn Văn Hòa', balance: 9800000 },
+  { id: 10, username: 'vuongthilan', password: '123456', name: 'Vương Thị Lan', balance: 3500000 },
+  { id: 11, username: 'hoangvandat', password: '123456', name: 'Hoàng Văn Đạt', balance: 7200000 },
+  { id: 12, username: 'dotuananh', password: '123456', name: 'Đỗ Tuấn Anh', balance: 5100000 },
+  { id: 13, username: 'buithimy', password: '123456', name: 'Bùi Thị My', balance: 4100000 },
+  { id: 14, username: 'duongvanhai', password: '123456', name: 'Dương Văn Hải', balance: 6300000 },
+  { id: 15, username: 'nguyenthihuong', password: '123456', name: 'Nguyễn Thị Hương', balance: 8900000 },
+  { id: 16, username: 'tranvanloc', password: '123456', name: 'Trần Văn Lộc', balance: 5600000 },
+  { id: 17, username: 'phanthitrang', password: '123456', name: 'Phan Thị Trang', balance: 4700000 },
+  { id: 18, username: 'lequanghuy', password: '123456', name: 'Lê Quang Huy', balance: 6800000 },
+  { id: 19, username: 'vuthithao', password: '123456', name: 'Vũ Thị Thảo', balance: 5400000 },
+  { id: 20, username: 'nguyenvandung', password: '123456', name: 'Nguyễn Văn Dũng', balance: 9100000 },
+  { id: 21, username: 'hoangthianh', password: '123456', name: 'Hoàng Thị Anh', balance: 3800000 },
+  { id: 22, username: 'dotrungkien', password: '123456', name: 'Đỗ Trung Kiên', balance: 6500000 },
+  { id: 23, username: 'buivanhung', password: '123456', name: 'Bùi Văn Hùng', balance: 5200000 },
+  { id: 24, username: 'duongthivy', password: '123456', name: 'Dương Thị Vy', balance: 7400000 },
+  { id: 25, username: 'tranvantien', password: '123456', name: 'Trần Văn Tiến', balance: 4600000 },
+  { id: 26, username: 'phamthilinh', password: '123456', name: 'Phạm Thị Linh', balance: 5800000 },
+  { id: 27, username: 'leminhtuan', password: '123456', name: 'Lê Minh Tuấn', balance: 8200000 },
+  { id: 28, username: 'vuthithuy', password: '123456', name: 'Vũ Thị Thủy', balance: 3900000 },
+  { id: 29, username: 'nguyenvanbinh', password: '123456', name: 'Nguyễn Văn Bình', balance: 6700000 },
+  { id: 30, username: 'hoangthihue', password: '123456', name: 'Hoàng Thị Huệ', balance: 4900000 },
+  { id: 31, username: 'dotrungthong', password: '123456', name: 'Đỗ Trung Thông', balance: 7100000 },
+  { id: 32, username: 'buivanlong', password: '123456', name: 'Bùi Văn Long', balance: 5300000 },
+  { id: 33, username: 'duongthilinh', password: '123456', name: 'Dương Thị Linh', balance: 8600000 },
+  { id: 34, username: 'tranvanquang', password: '123456', name: 'Trần Văn Quang', balance: 4400000 },
+  { id: 35, username: 'phamthihang', password: '123456', name: 'Phạm Thị Hằng', balance: 5900000 },
+  { id: 36, username: 'levanphuc', password: '123456', name: 'Lê Văn Phúc', balance: 7800000 },
+  { id: 37, username: 'vuthithu', password: '123456', name: 'Vũ Thị Thu', balance: 4300000 },
+  { id: 38, username: 'nguyenvanthanh', password: '123456', name: 'Nguyễn Văn Thành', balance: 6400000 },
+  { id: 39, username: 'hoangthikhanh', password: '123456', name: 'Hoàng Thị Khanh', balance: 5500000 },
+  { id: 40, username: 'dotrungnghia', password: '123456', name: 'Đỗ Trung Nghĩa', balance: 7300000 },
+  { id: 41, username: 'buivanthang', password: '123456', name: 'Bùi Văn Thắng', balance: 4800000 },
+  { id: 42, username: 'duongthiquynh', password: '123456', name: 'Dương Thị Quỳnh', balance: 6900000 },
+  { id: 43, username: 'tranvannam', password: '123456', name: 'Trần Văn Nam', balance: 5100000 },
+  { id: 44, username: 'phamthithu', password: '123456', name: 'Phạm Thị Thu', balance: 5700000 },
+  { id: 45, username: 'levanthien', password: '123456', name: 'Lê Văn Thiện', balance: 8100000 },
+  { id: 46, username: 'vuthiphuong', password: '123456', name: 'Vũ Thị Phương', balance: 4500000 },
+  { id: 47, username: 'nguyenvanhieu', password: '123456', name: 'Nguyễn Văn Hiếu', balance: 6600000 },
+  { id: 48, username: 'hoangthithuy', password: '123456', name: 'Hoàng Thị Thủy', balance: 5000000 },
+  { id: 49, username: 'dotrungtam', password: '123456', name: 'Đỗ Trung Tâm', balance: 7600000 },
+  { id: 50, username: 'buivanthinh', password: '123456', name: 'Bùi Văn Thịnh', balance: 4200000 },
+  { id: 51, username: 'duongthimai', password: '123456', name: 'Dương Thị Mai', balance: 6100000 },
+  { id: 52, username: 'tranvankhoa', password: '123456', name: 'Trần Văn Khoa', balance: 5400000 },
+  { id: 53, username: 'phamthihong', password: '123456', name: 'Phạm Thị Hồng', balance: 8800000 },
+  { id: 54, username: 'levanhoa', password: '123456', name: 'Lê Văn Hòa', balance: 4700000 },
+  { id: 55, username: 'vuthixuan', password: '123456', name: 'Vũ Thị Xuân', balance: 7000000 },
+  { id: 56, username: 'nguyenvanphat', password: '123456', name: 'Nguyễn Văn Phát', balance: 4900000 },
+  { id: 57, username: 'hoangthivan', password: '123456', name: 'Hoàng Thị Vân', balance: 6500000 },
+  { id: 58, username: 'dotrungdung', password: '123456', name: 'Đỗ Trung Dũng', balance: 5800000 },
+  { id: 59, username: 'buivankhanh', password: '123456', name: 'Bùi Văn Khánh', balance: 7200000 },
+  { id: 60, username: 'duongthihuong', password: '123456', name: 'Dương Thị Hương', balance: 4600000 },
+  { id: 61, username: 'tranvanchien', password: '123456', name: 'Trần Văn Chiến', balance: 6300000 },
+  { id: 62, username: 'phamthihien', password: '123456', name: 'Phạm Thị Hiền', balance: 5500000 },
+  { id: 63, username: 'levanthinh', password: '123456', name: 'Lê Văn Thịnh', balance: 8400000 },
+  { id: 64, username: 'vuthininh', password: '123456', name: 'Vũ Thị Ninh', balance: 4400000 },
+  { id: 65, username: 'nguyenvanhau', password: '123456', name: 'Nguyễn Văn Hậu', balance: 6800000 },
+  { id: 66, username: 'hoangthiminh', password: '123456', name: 'Hoàng Thị Minh', balance: 5200000 },
+  { id: 67, username: 'dotrungkien', password: '123456', name: 'Đỗ Trung Kiên', balance: 7500000 },
+  { id: 68, username: 'buivanvu', password: '123456', name: 'Bùi Văn Vũ', balance: 5000000 },
+  { id: 69, username: 'duongthiha', password: '123456', name: 'Dương Thị Hà', balance: 6900000 },
+  { id: 70, username: 'tranvanhoi', password: '123456', name: 'Trần Văn Hội', balance: 4800000 },
+  { id: 71, username: 'phamthitham', password: '123456', name: 'Phạm Thị Thảm', balance: 6100000 },
+  { id: 72, username: 'levanphong', password: '123456', name: 'Lê Văn Phong', balance: 7900000 },
+  { id: 73, username: 'vuthidiem', password: '123456', name: 'Vũ Thị Diễm', balance: 4500000 },
+  { id: 74, username: 'nguyenvanhiep', password: '123456', name: 'Nguyễn Văn Hiệp', balance: 6700000 },
+  { id: 75, username: 'hoangthitrang', password: '123456', name: 'Hoàng Thị Trang', balance: 5300000 },
+  { id: 76, username: 'dotrungphuong', password: '123456', name: 'Đỗ Trung Phương', balance: 7400000 },
+  { id: 77, username: 'buivansang', password: '123456', name: 'Bùi Văn Sang', balance: 4900000 },
+  { id: 78, username: 'duongthidung', password: '123456', name: 'Dương Thị Dũng', balance: 6600000 },
+  { id: 79, username: 'tranvanhuy', password: '123456', name: 'Trần Văn Huy', balance: 5600000 },
+  { id: 80, username: 'phamthihai', password: '123456', name: 'Phạm Thị Hải', balance: 8000000 },
+  { id: 81, username: 'levandinh', password: '123456', name: 'Lê Văn Đình', balance: 4700000 },
+  { id: 82, username: 'vuthilam', password: '123456', name: 'Vũ Thị Lâm', balance: 6400000 },
+  { id: 83, username: 'nguyenvanphuc', password: '123456', name: 'Nguyễn Văn Phúc', balance: 5800000 },
+  { id: 84, username: 'hoangthihanh', password: '123456', name: 'Hoàng Thị Hạnh', balance: 5100000 },
+  { id: 85, username: 'dotrungtien', password: '123456', name: 'Đỗ Trung Tiến', balance: 7300000 },
+  { id: 86, username: 'buivanthuy', password: '123456', name: 'Bùi Văn Thủy', balance: 5000000 },
+  { id: 87, username: 'duongthithanh', password: '123456', name: 'Dương Thị Thanh', balance: 7000000 },
+  { id: 88, username: 'tranvanhuan', password: '123456', name: 'Trần Văn Huân', balance: 5400000 },
+  { id: 89, username: 'phamthithuy', password: '123456', name: 'Phạm Thị Thủy', balance: 8500000 },
+  { id: 90, username: 'levanhai', password: '123456', name: 'Lê Văn Hải', balance: 4800000 },
+  { id: 91, username: 'vuthidang', password: '123456', name: 'Vũ Thị Đăng', balance: 6200000 },
+  { id: 92, username: 'nguyenvanthinh', password: '123456', name: 'Nguyễn Văn Thịnh', balance: 5700000 },
+  { id: 93, username: 'hoangthihong', password: '123456', name: 'Hoàng Thị Hồng', balance: 7600000 },
+  { id: 94, username: 'dotrungdai', password: '123456', name: 'Đỗ Trung Đại', balance: 5100000 },
+  { id: 95, username: 'buivankiet', password: '123456', name: 'Bùi Văn Kiệt', balance: 6500000 },
+  { id: 96, username: 'duongthitam', password: '123456', name: 'Dương Thị Tâm', balance: 5900000 },
+  { id: 97, username: 'tranvanquan', password: '123456', name: 'Trần Văn Quân', balance: 7700000 },
+  { id: 98, username: 'phamthituyet', password: '123456', name: 'Phạm Thị Tuyết', balance: 5200000 },
+  { id: 99, username: 'levanthanh', password: '123456', name: 'Lê Văn Thành', balance: 6800000 },
+  { id: 100, username: 'vuthihang', password: '123456', name: 'Vũ Thị Hằng', balance: 5500000 },
+  { id: 101, username: 'nguyenvanhau', password: '123456', name: 'Nguyễn Văn Hậu', balance: 7100000 },
+  { id: 102, username: 'hoangthikieu', password: '123456', name: 'Hoàng Thị Kiều', balance: 5600000 },
+  { id: 103, username: 'dotrungvu', password: '123456', name: 'Đỗ Trung Vũ', balance: 8000000 },
+  { id: 104, username: 'buivannam', password: '123456', name: 'Bùi Văn Nam', balance: 4900000 },
+  { id: 105, username: 'duongthilinh', password: '123456', name: 'Dương Thị Linh', balance: 7200000 },
+];
+
+// Mock transactions history - Lưu trữ tất cả giao dịch
+export let MOCK_TRANSACTIONS = [];
+
+// Helper function để generate transactions
+export const generateTransaction = (fromUser, toUser, amount, note = '') => {
+  if (!fromUser || !toUser || !amount || amount <= 0) {
+    throw new Error('Invalid transaction data');
+  }
+  
+  return {
+    id: Date.now() + Math.random(),
+    fromUserId: fromUser.id,
+    fromUsername: fromUser.username,
+    fromName: fromUser.name,
+    toUserId: toUser.id,
+    toUsername: toUser.username,
+    toName: toUser.name,
+    amount: parseFloat(amount),
+    note: note || 'Chuyển tiền',
+    timestamp: new Date().toISOString(),
+    status: 'completed'
+  };
+};
+
+// Database-like functions - CRUD operations cho Users
+export const getUsers = () => [...MOCK_USERS]; // Return copy để tránh mutation
+
+export const getUserById = (id) => {
+  if (!id || isNaN(id)) return null;
+  return MOCK_USERS.find(u => u.id === parseInt(id)) || null;
+};
+
+export const getUserByUsername = (username) => {
+  if (!username || typeof username !== 'string') return null;
+  return MOCK_USERS.find(u => u.username.toLowerCase() === username.toLowerCase().trim()) || null;
+};
+
+export const updateUserBalance = (userId, newBalance) => {
+  if (!userId || isNaN(userId)) {
+    throw new Error('Invalid user ID');
+  }
+  
+  if (isNaN(newBalance) || newBalance < 0) {
+    throw new Error('Invalid balance amount');
+  }
+  
+  const user = MOCK_USERS.find(u => u.id === parseInt(userId));
+  if (!user) {
+    throw new Error('User not found');
+  }
+  
+  user.balance = parseFloat(newBalance);
+  return { ...user }; // Return copy
+};
+
+// Transaction operations
+export const addTransaction = (transaction) => {
+  if (!transaction || !transaction.id) {
+    throw new Error('Invalid transaction data');
+  }
+  
+  // Insert at beginning (newest first)
+  MOCK_TRANSACTIONS.unshift(transaction);
+  
+  // Giới hạn số lượng transactions để tránh memory leak (giữ tối đa 10000 transactions)
+  if (MOCK_TRANSACTIONS.length > 10000) {
+    MOCK_TRANSACTIONS = MOCK_TRANSACTIONS.slice(0, 10000);
+  }
+  
+  return { ...transaction }; // Return copy
+};
+
+export const getTransactions = (userId = null, options = {}) => {
+  let transactions = [...MOCK_TRANSACTIONS]; // Return copy
+  
+  // Filter by user if provided
+  if (userId) {
+    const userIdNum = parseInt(userId);
+    if (isNaN(userIdNum)) {
+      return [];
+    }
+    transactions = transactions.filter(
+      t => t.fromUserId === userIdNum || t.toUserId === userIdNum
+    );
+  }
+  
+  // Sort options
+  if (options.sortBy === 'amount') {
+    transactions.sort((a, b) => 
+      options.sortOrder === 'desc' ? b.amount - a.amount : a.amount - b.amount
+    );
+  } else if (options.sortBy === 'timestamp') {
+    transactions.sort((a, b) => {
+      const dateA = new Date(a.timestamp);
+      const dateB = new Date(b.timestamp);
+      return options.sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+    });
+  }
+  
+  // Pagination
+  if (options.page && options.limit) {
+    const page = parseInt(options.page) || 1;
+    const limit = parseInt(options.limit) || 10;
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    return {
+      transactions: transactions.slice(startIndex, endIndex),
+      total: transactions.length,
+      page,
+      limit,
+      totalPages: Math.ceil(transactions.length / limit)
+    };
+  }
+  
+  return transactions;
+};
+
+export const getTransactionById = (id) => {
+  if (!id) return null;
+  return MOCK_TRANSACTIONS.find(t => t.id.toString() === id.toString()) || null;
+};
+
+// Statistics functions
+export const getStats = () => {
+  const totalUsers = MOCK_USERS.length;
+  const totalBalance = MOCK_USERS.reduce((sum, u) => sum + u.balance, 0);
+  const avgBalance = totalUsers > 0 ? totalBalance / totalUsers : 0;
+  const totalTransactions = MOCK_TRANSACTIONS.length;
+  const totalTransactionAmount = MOCK_TRANSACTIONS.reduce((sum, t) => sum + t.amount, 0);
+  
+  return {
+    totalUsers,
+    totalBalance,
+    avgBalance,
+    totalTransactions,
+    totalTransactionAmount
+  };
+};
+
+// Search users
+export const searchUsers = (query, options = {}) => {
+  if (!query || typeof query !== 'string') {
+    return [];
+  }
+  
+  const searchTerm = query.toLowerCase().trim();
+  let results = MOCK_USERS.filter(user => 
+    user.name.toLowerCase().includes(searchTerm) ||
+    user.username.toLowerCase().includes(searchTerm)
+  );
+  
+  // Sort options
+  if (options.sortBy === 'name') {
+    results.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (options.sortBy === 'balance') {
+    results.sort((a, b) => 
+      options.sortOrder === 'desc' ? b.balance - a.balance : a.balance - b.balance
+    );
+  }
+  
+  // Pagination
+  if (options.page && options.limit) {
+    const page = parseInt(options.page) || 1;
+    const limit = parseInt(options.limit) || 10;
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    return {
+      users: results.slice(startIndex, endIndex),
+      total: results.length,
+      page,
+      limit,
+      totalPages: Math.ceil(results.length / limit)
+    };
+  }
+  
+  return results;
+};
