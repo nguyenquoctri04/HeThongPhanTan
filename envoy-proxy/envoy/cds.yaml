@@ -1,0 +1,63 @@
+resources:
+- "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
+  name: backend_service
+  type: STRICT_DNS
+  dns_lookup_family: V4_ONLY
+  connect_timeout: 0.25s
+  lb_policy: ROUND_ROBIN
+
+  # HEALTH CHECK
+  health_checks:
+    - timeout: 1s
+      interval: 5s               # check mỗi 5 giây
+      unhealthy_threshold: 1
+      healthy_threshold: 1
+      http_health_check:
+        path: "/"                # endpoint health check
+      reuse_connection: true
+
+  # OUTLIER DETECTION: loại host fail khỏi LB hoàn toàn
+  outlier_detection:
+    consecutive_5xx: 1
+    interval: 5s
+    base_ejection_time: 10s
+    max_ejection_percent: 100
+
+  common_lb_config:
+    healthy_panic_threshold:
+      value: 0
+
+  load_assignment:
+    cluster_name: backend_service
+    endpoints:
+    - lb_endpoints:
+      - endpoint:
+          address:
+            socket_address:
+              address: host.docker.internal
+              port_value: 5000
+      - endpoint:
+          address:
+            socket_address:
+              address: host.docker.internal
+              port_value: 5001
+      - endpoint:
+          address:
+            socket_address:
+              address: host.docker.internal
+              port_value: 5002
+      - endpoint:
+          address:
+            socket_address:
+              address: host.docker.internal
+              port_value: 5003
+      - endpoint:
+          address:
+            socket_address:
+              address: host.docker.internal
+              port_value: 5004
+      - endpoint:
+          address:
+            socket_address:
+              address: host.docker.internal
+              port_value: 5005

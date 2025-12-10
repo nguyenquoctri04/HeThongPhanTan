@@ -1,0 +1,13 @@
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.30.1
+    container_name: envoy
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+      - ./envoy/cds.yaml:/etc/envoy/cds.yaml:ro   # dynamic cluster từ file
+    command: envoy -c /etc/envoy/envoy.yaml --service-cluster backend_proxy --service-node node1
+    ports:
+      - "8080:8080"   # listener HTTP
+      - "9901:9901"   # admin
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
