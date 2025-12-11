@@ -16,7 +16,7 @@ envoy-proxy/
 ## How It Works
 
 1.  **Envoy** starts and reads `envoy.yaml`.
-2.  `envoy.yaml` defines a **Listener** on port `8080`.
+2.  `envoy.yaml` defines a **Listener** on port `10000`.
 3.  It points to `cds.yaml` for **Cluster** configuration (CDS - Cluster Discovery Service).
 4.  `cds.yaml` defines the `backend_service` cluster, including:
     *   **Load Balancing Policy**: Round Robin.

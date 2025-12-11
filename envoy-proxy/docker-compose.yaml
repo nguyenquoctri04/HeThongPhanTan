@@ -7,7 +7,7 @@ services:
       - ./envoy/cds.yaml:/etc/envoy/cds.yaml:ro   # dynamic cluster từ file
     command: envoy -c /etc/envoy/envoy.yaml --service-cluster backend_proxy --service-node node1
     ports:
-      - "8080:8080"   # listener HTTP
+      - "10000:10000"   # listener HTTP
       - "9901:9901"   # admin
     extra_hosts:
       - "host.docker.internal:host-gateway"
