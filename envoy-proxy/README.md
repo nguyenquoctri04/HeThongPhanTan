@@ -1,32 +1,46 @@
-# Envoy Proxy Configuration
+# Envoy Proxy & Monitoring Stack
 
-This directory contains the configuration for the Envoy Proxy used to load balance traffic to your **Backend Service**.
+This directory contains the configuration for the **Envoy Proxy**, along with a monitoring stack using **Prometheus** and **Grafana**.
 
 ## Project Structure
 
 ```
 envoy-proxy/
-├── docker-compose.yaml      # Config to run Envoy via Docker
+├── docker-compose.yaml      # Runs Envoy, Prometheus, and Grafana
 ├── envoy/
 │   ├── envoy.yaml           # Main Envoy config (Static Listeners + Dynamic CDS)
 │   └── cds.yaml             # Cluster Discovery Service (Dynamic Cluster + Endpoints)
+├── prometheus/
+│   └── prometheus.yml       # Prometheus scraping configuration
+├── grafana/
+│   └── provisioning/        # Grafana datasources and dashboards
 └── README.md
 ```
 
+## Services & Ports
+
+| Service | Port | Description |
+| :--- | :--- | :--- |
+| **Envoy Proxy** | `10000` | The load balancer entry point for your backend services. |
+| **Envoy Admin** | `9901` | Administration interface for Envoy. |
+| **Prometheus** | `9090` | Metrics collection database. |
+| **Grafana** | `3000` | Visualization dashboard. Default login: `admin`/`admin`. |
+
 ## How It Works
 
-1.  **Envoy** starts and reads `envoy.yaml`.
-2.  `envoy.yaml` defines a **Listener** on port `10000`.
-3.  It points to `cds.yaml` for **Cluster** configuration (CDS - Cluster Discovery Service).
-4.  `cds.yaml` defines the `backend_service` cluster, including:
-    *   **Load Balancing Policy**: Round Robin.
-    *   **Health Checks**: Active HTTP health checks to `/`.
-    *   **Outlier Detection**: Automatically ejects failing instances (Passive Health Check).
-    *   **Endpoints**: The list of backend targets (IPs and Ports).
+### 1. Envoy Proxy
+*   **Listener**: Listens on port `10000` and forwards traffic to the `backend_service` cluster.
+*   **Dynamic Configuration**: Uses `cds.yaml` to discover backend instances. You can update `cds.yaml` to add/remove backend instances without restarting Envoy.
+*   **Health Checks**: Performs active HTTP health checks on backend instances.
+*   **Outlier Detection**: Automatically ejects failing instances.
 
-## How to Add/Remove Instances
+### 2. Monitoring
+*   **Prometheus** scrapes metrics from Envoy's admin interface (`/stats/prometheus`) every 5 seconds (configured in `prometheus.yml`).
+*   **Grafana** connects to Prometheus as a datasource and provides pre-provisioned dashboards to visualize Envoy's performance (RPS, Success Rates, Latency, etc.).
 
-To register a new instance (e.g., running on port `5006`), edit **`envoy/cds.yaml`**.
+## How to Add/Remove Backend Instances
+
+To register a new backend instance (e.g., running on port `5006`), edit **`envoy/cds.yaml`**.
 
 Find the `load_assignment` -> `endpoints` -> `lb_endpoints` section and add your instance:
 
@@ -38,17 +52,21 @@ Find the `load_assignment` -> `endpoints` -> `lb_endpoints` section and add your
               port_value: 5006
 ```
 
-**Envoy will automatically reload this configuration without restarting.**
+**Envoy will automatically reload this configuration.**
 
 ## Troubleshooting
 
 ### "No Healthy Upstream"
-*   **Check Instances**: Ensure your backend services are running on the ports specified (e.g., 5000-5005).
-*   **Health Check Failure**: Envoy checks `GET /` on your backend. If it returns 500 or takes too long, the instance is marked unhealthy.
-*   **Outlier Ejection**: If an instance returns 5xx errors, it will be temporarily ejected.
-*   **Connectivity**: If `host.docker.internal` doesn't work (common on some Windows setups or IPv6), try using your machine's **LAN IPv4 Address** (e.g., `192.168.1.18`).
+*   **Check Instances**: Ensure your backend services are running.
+*   **Health Checks**: Envoy checks `GET /` on your backend. If it fails, the instance is marked unhealthy.
+*   **Connectivity**: If `host.docker.internal` fails, try using your machine's **LAN IPv4 Address**.
 
-### Commands
-*   **Start Envoy**: `docker-compose up -d`
+### Grafana Dashboards Not Showing
+*   Ensure the `grafana/provisioning` directory is correctly mounted in `docker-compose.yaml`.
+*   Check Grafana logs: `docker-compose logs grafana`.
+
+## Commands
+
+*   **Start Stack**: `docker-compose up -d`
+*   **Stop Stack**: `docker-compose down`
 *   **View Logs**: `docker-compose logs -f`
-*   **Reload Config**: Automatic (File Watcher).
