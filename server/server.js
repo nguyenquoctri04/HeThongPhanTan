@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from 'url';
 import { MOCK_USERS } from "./mockData.js";
 
 // Routes
@@ -12,11 +14,17 @@ import statsRoutes from "./routes/stats.routes.js";
 // Middleware
 import { requestLogger, errorLogger } from "./middleware/logger.js";
 import { errorHandler } from "./middleware/errorHandler.js";
-
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// Load .env ở ROOT
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+});
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
+console.log("PORT:", PORT);
+const HOST = process.env.HOST;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Middleware
@@ -59,7 +67,7 @@ app.use(errorLogger);
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, HOST,() => {
   console.log('='.repeat(50));
   console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
   console.log(`📊 Tổng số users: ${MOCK_USERS.length}`);
