@@ -37,6 +37,11 @@ static_resources:
                           prefix: "/"
                         route:
                           cluster: backend_service
+                          timeout: 5s
+                          retry_policy:
+                            retry_on: connect-failure,reset,5xx
+                            num_retries: 2
+                            per_try_timeout: 1s
               http_filters:
                 - name: envoy.filters.http.router
                   typed_config:
