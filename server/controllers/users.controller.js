@@ -1,76 +1,69 @@
-import { getUsers, getUserById, searchUsers } from '../mockData.js';
+import * as UserService from '../services/user.service.js';
 
 /**
  * Lấy danh sách users với pagination, search, sort
  */
 export const getUsersList = async (req, res) => {
   const { page, limit, search, sortBy, sortOrder } = req.query;
-  
-  // Search users if query provided
-  if (search) {
-    const result = searchUsers(search, { page, limit, sortBy, sortOrder: sortOrder || 'asc' });
-    
-    if (page && limit) {
+
+  const options = {
+    page: page ? parseInt(page) : null,
+    limit: limit ? parseInt(limit) : null,
+    sortBy: sortBy,
+    sortOrder: sortOrder || 'asc'
+  };
+
+  try {
+    const result = await UserService.searchUsers(search, options);
+
+    // Check if result is paginated object or array
+    if (result.users && result.pagination === undefined) {
+      // Service returns { users, total, page, limit, totalPages } when paginated
       return res.json({
         success: true,
-        data: result.users || result,
+        data: result.users,
         pagination: {
-          page: result.page || 1,
-          limit: result.limit || result.length,
-          total: result.total || result.length,
-          totalPages: result.totalPages || 1
+          page: result.page,
+          limit: result.limit,
+          total: result.total,
+          totalPages: result.totalPages
         }
       });
     }
-    
-    return res.json({
+
+    // If search users returns the standardized structure directly or array
+    if (Array.isArray(result)) {
+      return res.json({
+        success: true,
+        data: result,
+        total: result.length
+      });
+    }
+
+    // Use service's return structure directly if it matches what we want
+    if (result.users) {
+      return res.json({
+        success: true,
+        data: result.users,
+        pagination: {
+          page: result.page,
+          limit: result.limit,
+          total: result.total,
+          totalPages: result.totalPages
+        }
+      });
+    }
+
+    // Fallback
+    res.json({
       success: true,
       data: result,
-      total: Array.isArray(result) ? result.length : result.total || 0
+      total: Array.isArray(result) ? result.length : 0
     });
+
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
-  
-  // Get all users with pagination
-  let users = getUsers().map(({ password, ...user }) => user);
-  
-  // Sort
-  if (sortBy === 'name') {
-    users.sort((a, b) => {
-      const order = sortOrder === 'desc' ? -1 : 1;
-      return a.name.localeCompare(b.name) * order;
-    });
-  } else if (sortBy === 'balance') {
-    users.sort((a, b) => {
-      const order = sortOrder === 'desc' ? -1 : 1;
-      return (a.balance - b.balance) * order;
-    });
-  }
-  
-  // Pagination
-  if (page && limit) {
-    const pageNum = parseInt(page);
-    const limitNum = parseInt(limit);
-    const startIndex = (pageNum - 1) * limitNum;
-    const endIndex = startIndex + limitNum;
-    const paginatedUsers = users.slice(startIndex, endIndex);
-    
-    return res.json({
-      success: true,
-      data: paginatedUsers,
-      pagination: {
-        page: pageNum,
-        limit: limitNum,
-        total: users.length,
-        totalPages: Math.ceil(users.length / limitNum)
-      }
-    });
-  }
-  
-  res.json({
-    success: true,
-    data: users,
-    total: users.length
-  });
 };
 
 /**
@@ -78,16 +71,17 @@ export const getUsersList = async (req, res) => {
  */
 export const getUser = async (req, res) => {
   const userId = req.params.id;
-  const user = getUserById(userId);
-  
+  const user = await UserService.getUserById(userId);
+
   if (!user) {
     return res.status(404).json({
       success: false,
       message: "Không tìm thấy người dùng"
     });
   }
-  
-  const { password, ...userWithoutPassword } = user;
+
+  const userData = user.toJSON();
+  const { password, ...userWithoutPassword } = userData;
   res.json({
     success: true,
     data: userWithoutPassword
