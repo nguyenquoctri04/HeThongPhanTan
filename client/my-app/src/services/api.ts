@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 export interface User {
   id: number;
@@ -76,7 +76,7 @@ export const transferMoney = async (transfer: TransferRequest): Promise<ApiRespo
 };
 
 export const getTransactions = async (userId?: number): Promise<ApiResponse<Transaction[]>> => {
-  const url = userId 
+  const url = userId
     ? `${API_BASE_URL}/transactions?userId=${userId}`
     : `${API_BASE_URL}/transactions`;
   const response = await fetch(url);
