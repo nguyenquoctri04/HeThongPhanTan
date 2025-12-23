@@ -21,7 +21,7 @@ export default function Users() {
 
   useEffect(() => {
     let filtered = [...users];
-    
+
     // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(
@@ -30,7 +30,7 @@ export default function Users() {
           u.username.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    
+
     // Sort
     filtered.sort((a, b) => {
       if (sortBy === 'name') {
@@ -39,7 +39,7 @@ export default function Users() {
         return b.balance - a.balance;
       }
     });
-    
+
     setFilteredUsers(filtered);
   }, [searchQuery, users, sortBy]);
 
@@ -62,7 +62,6 @@ export default function Users() {
   const totalUsers = users.length;
   const totalBalance = users.reduce((sum, u) => sum + u.balance, 0);
   const avgBalance = totalUsers > 0 ? totalBalance / totalUsers : 0;
-  const topBalance = users.length > 0 ? Math.max(...users.map(u => u.balance)) : 0;
 
   return (
     <div className="space-y-6">
@@ -151,11 +150,10 @@ export default function Users() {
               {filteredUsers.map((userItem) => (
                 <div
                   key={userItem.id}
-                  className={`p-4 rounded-lg border transition-all hover:shadow-md ${
-                    currentUser?.id === userItem.id
+                  className={`p-4 rounded-lg border transition-all hover:shadow-md ${currentUser?.id === userItem.id
                       ? 'bg-blue-50 border-blue-300 ring-2 ring-blue-200'
                       : 'bg-gray-50 border-gray-200 hover:border-blue-300'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-lg flex-shrink-0">

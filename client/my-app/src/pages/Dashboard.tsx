@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Send, History, Users, TrendingUp, DollarSign, ArrowUpRight, ArrowDownRight, Eye, EyeOff } from 'lucide-react';
+import { Send, History, Users, ArrowUpRight, ArrowDownRight, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getTransactions } from '../services/api';
 import type { Transaction } from '../services/api';

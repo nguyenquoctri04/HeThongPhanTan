@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { User as UserIcon, DollarSign, TrendingUp, ArrowDownRight, Calendar, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getTransactions } from '../services/api';
@@ -30,7 +30,7 @@ export default function Profile() {
       const response = await getTransactions(user?.id);
       if (response.success && response.data) {
         setTransactions(response.data);
-        
+
         // Calculate stats
         const sent = response.data
           .filter(t => t.fromUserId === user?.id)
@@ -38,11 +38,11 @@ export default function Profile() {
         const received = response.data
           .filter(t => t.toUserId === user?.id)
           .reduce((sum, t) => sum + t.amount, 0);
-        
+
         const sortedTransactions = [...response.data].sort(
           (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
         );
-        
+
         setStats({
           totalSent: sent,
           totalReceived: received,
@@ -157,9 +157,8 @@ export default function Profile() {
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        isSent ? 'bg-red-100' : 'bg-green-100'
-                      }`}
+                      className={`w-10 h-10 rounded-full flex items-center justify-center ${isSent ? 'bg-red-100' : 'bg-green-100'
+                        }`}
                     >
                       {isSent ? (
                         <TrendingUp className="w-5 h-5 text-red-600" />
@@ -175,9 +174,8 @@ export default function Profile() {
                     </div>
                   </div>
                   <p
-                    className={`font-semibold ${
-                      isSent ? 'text-red-600' : 'text-green-600'
-                    }`}
+                    className={`font-semibold ${isSent ? 'text-red-600' : 'text-green-600'
+                      }`}
                   >
                     {isSent ? '-' : '+'}
                     {showBalance ? formatCurrency(transaction.amount) : '•••'}

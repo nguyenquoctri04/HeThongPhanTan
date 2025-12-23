@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { History, ArrowUpRight, ArrowDownRight, Filter, Calendar } from 'lucide-react';
 import { useUI } from '../context/UIContext';
 import { useAuth } from '../context/AuthContext';
@@ -10,7 +9,6 @@ import { formatCurrency, formatDate, formatRelativeTime } from '../utils/format'
 export default function TransactionHistory() {
   const { user } = useAuth();
   const { showBalance } = useUI();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'sent' | 'received'>('all');
@@ -27,13 +25,13 @@ export default function TransactionHistory() {
       const response = await getTransactions(user?.id);
       if (response.success && response.data) {
         let filtered = response.data;
-        
+
         if (filter === 'sent') {
           filtered = response.data.filter(t => t.fromUserId === user?.id);
         } else if (filter === 'received') {
           filtered = response.data.filter(t => t.toUserId === user?.id);
         }
-        
+
         setTransactions(filtered);
       }
     } catch (error) {
@@ -62,31 +60,28 @@ export default function TransactionHistory() {
           <Filter className="w-5 h-5 text-gray-500" />
           <button
             onClick={() => setFilter('all')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-              filter === 'all'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'all'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
           >
             Tất cả
           </button>
           <button
             onClick={() => setFilter('sent')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-              filter === 'sent'
-                ? 'bg-red-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'sent'
+              ? 'bg-red-600 text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
           >
             Đã gửi
           </button>
           <button
             onClick={() => setFilter('received')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-              filter === 'received'
-                ? 'bg-green-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'received'
+              ? 'bg-green-600 text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
           >
             Đã nhận
           </button>
@@ -112,9 +107,8 @@ export default function TransactionHistory() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-4 flex-1 min-w-0">
                       <div
-                        className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          isSent ? 'bg-red-100' : 'bg-green-100'
-                        }`}
+                        className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${isSent ? 'bg-red-100' : 'bg-green-100'
+                          }`}
                       >
                         {isSent ? (
                           <ArrowUpRight className="w-6 h-6 text-red-600" />
@@ -149,9 +143,8 @@ export default function TransactionHistory() {
                     </div>
                     <div className="text-right flex-shrink-0">
                       <p
-                        className={`text-xl font-bold ${
-                          isSent ? 'text-red-600' : 'text-green-600'
-                        }`}
+                        className={`text-xl font-bold ${isSent ? 'text-red-600' : 'text-green-600'
+                          }`}
                       >
                         {isSent ? '-' : '+'}
                         {showBalance ? formatCurrency(transaction.amount) : '•••'}
@@ -173,8 +166,8 @@ export default function TransactionHistory() {
               {filter === 'all'
                 ? 'Bạn chưa có giao dịch nào trong hệ thống'
                 : filter === 'sent'
-                ? 'Bạn chưa gửi tiền cho ai'
-                : 'Bạn chưa nhận tiền từ ai'}
+                  ? 'Bạn chưa gửi tiền cho ai'
+                  : 'Bạn chưa nhận tiền từ ai'}
             </p>
           </div>
         )}
