@@ -23,9 +23,10 @@ if '%errorlevel%' NEQ '0' (
 :: --- CONFIGURATION ---
 :: Add your port and IP mappings here.
 :: Format: set "PORT_X=TARGET_IP"
-set "PORT_5000=192.168.1.10"
-set "PORT_5001=192.168.1.11"
-set "PORT_5002=192.168.1.12"
+set "PORT_5001=192.168.1.154"
+set "PORT_5002=26.223.34.99"
+set "PORT_5003=26.51.168.7"
+set "PORT_5004=192.168.1.13"
 :: ---------------------
 
 :Menu
@@ -62,8 +63,8 @@ for /f "tokens=1,2 delims==" %%A in ('set PORT_') do (
     set "fullKey=%%A"
     set "port=!fullKey:PORT_=!"
     set "targetIp=%%B"
-    echo Forwarding: localhost:!port! -^> !targetIp!:!port!
-    netsh interface portproxy add v4tov4 listenport=!port! listenaddress=127.0.0.1 connectport=!port! connectaddress=!targetIp!
+    echo Forwarding: localhost:!port! -^> !targetIp!:5000
+    netsh interface portproxy add v4tov4 listenport=!port! listenaddress=127.0.0.1 connectport=5000 connectaddress=!targetIp!
 )
 echo.
 echo Setup complete!
