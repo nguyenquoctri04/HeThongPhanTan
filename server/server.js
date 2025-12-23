@@ -41,7 +41,8 @@ const startServer = async () => {
     // 4. Start Server
     app.listen(PORT, HOST, () => {
       console.log('='.repeat(50));
-      console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
+      console.log(`🚀 Server đang chạy tại http://${HOST}:${PORT}`);
+      console.log(`🏠 Host: ${HOST}`);
       console.log(`🌍 Environment: ${NODE_ENV}`);
       console.log(`⏰ Thời gian khởi động: ${new Date().toLocaleString('vi-VN')}`);
       console.log('='.repeat(50));
